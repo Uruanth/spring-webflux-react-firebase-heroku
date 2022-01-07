@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { Question } from '../components/Question'
 
 const FormPage = ({ dispatch, loading, redirect, match,hasErrors, question, userId }) => {
+   
     const { register, handleSubmit } = useForm();
     const { id } = match.params
     const history = useHistory();

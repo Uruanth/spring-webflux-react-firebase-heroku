@@ -1,3 +1,5 @@
+
+
 const URL_BASE = 'http://localhost:8080';
 
 export const LOADING = 'LOADING'
@@ -54,7 +56,7 @@ export function fetchQuestion(id) {
     }
 }
 
-export function postQuestion(question) {
+export function postQuestion(question, navigate) {
     return async dispatch => {
         dispatch(loading())
         try {
@@ -69,7 +71,9 @@ export function postQuestion(question) {
                 }
             )
             const id = await response.text()
-            dispatch(success({redirect: `/question/${id}`}));
+            // dispatch(success({redirect: `/question/${id}`}));
+            navigate.push(`/question/${id}`);
+            
         } catch (error) {
             dispatch(failure())
         }

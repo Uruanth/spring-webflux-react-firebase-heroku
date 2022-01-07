@@ -1,12 +1,14 @@
 import * as actions from '../actions/questionActions'
 
 export const initialState = {
-  loading: true,
+  loading: false,
   hasErrors: false,
   questions: [],
   question: {},
   redirect: null
 }
+
+
 
 export default function questionsReducer(state = initialState, action) {
   switch (action.type) {

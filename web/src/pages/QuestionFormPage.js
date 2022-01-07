@@ -1,23 +1,19 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 import { postQuestion } from '../actions/questionActions'
 import { connect } from 'react-redux'
+import { useHistory } from "react-router-dom";
 
 const FormPage = ({ dispatch, loading, redirect, userId }) => {
     const { register, handleSubmit } = useForm();
-    const history = useHistory();
+
+    const navigate = useHistory();
 
     const onSubmit = data => {
         data.userId = userId;
-        dispatch(postQuestion(data));
+        dispatch(postQuestion(data, navigate));
     };
 
-    useEffect(() => {
-        if (redirect) {
-            history.push(redirect);
-        }
-    }, [redirect, history])
 
     return (
         <section>

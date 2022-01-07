@@ -105,3 +105,12 @@ body {
     float: right;
   }
   
+  .mr {
+    margin-right: 1.5rem;
+  }
+
+  .error-input{
+    font-size: 0.7rem;
+    color: #ea3546;
+    margin-top: 0;
+  }

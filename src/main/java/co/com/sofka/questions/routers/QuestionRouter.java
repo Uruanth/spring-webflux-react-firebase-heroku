@@ -25,6 +25,7 @@ public class QuestionRouter {
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(listUseCase.get(), QuestionDTO.class))
+
         );
     }
 
@@ -33,6 +34,7 @@ public class QuestionRouter {
         return route(
                 GET("/getOwnerAll/{userId}"),
                 request -> ServerResponse.ok()
+
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(
                                 ownerListUseCase.apply(request.pathVariable("userId")),
