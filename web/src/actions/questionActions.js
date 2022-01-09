@@ -44,13 +44,16 @@ export function fetchOwnerQuestions(userId) {
 }
 
 export function fetchQuestion(id) {
+    console.log("get ansers", id)
     return async dispatch => {
         dispatch(loading())
         try {
             const response = await fetch(`${URL_BASE}/get/${id}`)
             const data = await response.json()
+            console.log(data)
             dispatch(success({ question: data, redirect: null }))
         } catch (error) {
+            console.log("error")
             dispatch(failure())
         }
     }
@@ -71,7 +74,6 @@ export function postQuestion(question, navigate) {
                 }
             )
             const id = await response.text()
-            // dispatch(success({redirect: `/question/${id}`}));
             navigate.push(`/question/${id}`);
             
         } catch (error) {

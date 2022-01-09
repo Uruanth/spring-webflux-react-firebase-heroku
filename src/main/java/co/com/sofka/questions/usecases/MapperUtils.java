@@ -2,8 +2,10 @@ package co.com.sofka.questions.usecases;
 
 import co.com.sofka.questions.collections.Answer;
 import co.com.sofka.questions.collections.Question;
+import co.com.sofka.questions.collections.User;
 import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
+import co.com.sofka.questions.model.UserDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
@@ -35,6 +37,34 @@ public class MapperUtils {
         };
     }
 
+    public Function<UserDTO, User> mapperToUser() {
+        return updateUser -> {
+            var user = new User();
+            user.setId(updateUser.getId());
+            user.setUserId(updateUser.getUserId());
+            user.setName(updateUser.getName());
+            user.setImg(updateUser.getImg());
+            user.setQuestionsId(updateUser.getQuestionsId());
+            user.setAnswersId(updateUser.getAnswersId());
+            user.setVotedQuestionsId(updateUser.getVotedQuestionsId());
+            user.setVotedAnswersId(updateUser.getVotedAnswersId());
+            return user;
+        };
+    }
+
+    public Function<User, UserDTO> mapEntityToUser() {
+        return entity -> new UserDTO(
+                entity.getId(),
+                entity.getUserId(),
+                entity.getName(),
+                entity.getImg(),
+                entity.getQuestionsId(),
+                entity.getAnswersId(),
+                entity.getVotedQuestionsId(),
+                entity.getVotedAnswersId()
+        );
+    }
+
     public Function<Question, QuestionDTO> mapEntityToQuestion() {
         return entity -> new QuestionDTO(
                 entity.getId(),
@@ -47,9 +77,11 @@ public class MapperUtils {
 
     public Function<Answer, AnswerDTO> mapEntityToAnswer() {
         return entity -> new AnswerDTO(
-                entity.getId(),
+                entity.getQuestionId(),
                 entity.getUserId(),
-                entity.getAnswer()
+                entity.getAnswer(),
+                entity.getPosition(),
+                entity.getId()
         );
     }
 }

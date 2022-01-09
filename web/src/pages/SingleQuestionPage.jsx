@@ -26,6 +26,8 @@ const SingleQuestionPage = ({
 
     return <Question question={question} />
   }
+  question.answers?.sort(((a, b) => b.position - a.position));
+ 
 
   const renderAnswers = () => {
     return (question.answers && question.answers.length) ? question.answers.map(answer => (

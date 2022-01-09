@@ -4,12 +4,20 @@ import { useHistory } from "react-router-dom";
 import {  fetchQuestion, postAnswer } from '../actions/questionActions'
 import { connect } from 'react-redux'
 import { Question } from '../components/Question'
+import {  useSelector } from 'react-redux';
+
+
+
+
 
 const FormPage = ({ dispatch, loading, redirect, match,hasErrors, question, userId }) => {
    
+
     const { register, handleSubmit } = useForm();
     const { id } = match.params
     const history = useHistory();
+
+    
 
     const onSubmit = data => {
         data.userId =  userId;

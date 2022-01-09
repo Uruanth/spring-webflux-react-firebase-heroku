@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 
 import { fetchQuestions } from '../actions/questionActions'
 import { Question } from '../components/Question'
+import auth from '../service/firebase'
+
 
 const QuestionsPage = ({ dispatch, loading, questions, hasErrors }) => {
     useEffect(() => {
         dispatch(fetchQuestions())
     }, [dispatch])
-    
+
     const renderQuestions = () => {
         if (loading) return <p>Loading questions...</p>
         if (hasErrors) return <p>Unable to display questions.</p>

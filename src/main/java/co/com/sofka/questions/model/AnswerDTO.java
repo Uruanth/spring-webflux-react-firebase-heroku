@@ -15,9 +15,33 @@ public class AnswerDTO {
 
     private Integer position;
 
+    private String answerId;
+
+    public String getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(String answerId) {
+        this.answerId = answerId;
+    }
 
     public AnswerDTO() {
 
+    }
+
+    public AnswerDTO(@NotBlank String questionId, @NotBlank String userId, @NotBlank String answer, Integer position) {
+        this.userId = userId;
+        this.questionId = questionId;
+        this.answer = answer;
+        this.position = position;
+    }
+
+    public AnswerDTO(@NotBlank String questionId, @NotBlank String userId, @NotBlank String answer, Integer position, String answerId) {
+        this.userId = userId;
+        this.questionId = questionId;
+        this.answer = answer;
+        this.position = position;
+        this.answerId = answerId;
     }
 
     public AnswerDTO(@NotBlank String questionId, @NotBlank String userId, @NotBlank String answer) {
@@ -27,7 +51,7 @@ public class AnswerDTO {
     }
 
     public Integer getPosition() {
-        return Optional.ofNullable(position).orElse(1);
+        return Optional.ofNullable(position).orElse(0);
     }
 
     public void setPosition(Integer position) {
@@ -64,12 +88,12 @@ public class AnswerDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AnswerDTO answerDTO = (AnswerDTO) o;
-        return Objects.equals(userId, answerDTO.userId);
+        return Objects.equals(userId, answerDTO.userId) && Objects.equals(questionId, answerDTO.questionId) && Objects.equals(answer, answerDTO.answer) && Objects.equals(position, answerDTO.position) && Objects.equals(answerId, answerDTO.answerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId);
+        return Objects.hash(userId, questionId, answer, position, answerId);
     }
 
     @Override

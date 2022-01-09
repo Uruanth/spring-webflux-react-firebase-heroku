@@ -1,10 +1,10 @@
-import React, {useEffect } from 'react'
+import React from 'react'
 import { signInWithGoogle } from '../helpers/auth'
 import { useForm } from "react-hook-form";
-import { useDispatch } from 'react-redux';
-import { loaded, loading, login_with_user } from '../actions/authActions';
-import { useSelector } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
+import { loaded, loading, login_with_user, newUserDB } from '../actions/authActions';
 import { useHistory } from "react-router-dom";
+
 
 export default function SignIn() {
     const { register, formState: {errors}, handleSubmit } = useForm();
@@ -13,14 +13,16 @@ export default function SignIn() {
     const navigate = useHistory();
 
 
-    const handleSignIn = (e) => {
+    const handleSignIn = async (e) => {
         e.preventDefault();
-        signInWithGoogle();
+        await signInWithGoogle();
+        dispatch(newUserDB());
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         dispatch(loading());
-        dispatch(login_with_user(data.email, data.password));
+        await dispatch(login_with_user(data.email, data.password));
+        dispatch(newUserDB());
         dispatch(loaded());
     }
 

@@ -18,7 +18,6 @@ const rootReducer = combineReducers({
     auth: authReducer
 })
 
-// export default rootReducer;
 
 export default function generateStore() {
      return createStore(rootReducer,

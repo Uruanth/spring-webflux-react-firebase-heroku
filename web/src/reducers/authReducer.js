@@ -1,20 +1,21 @@
 import * as actions from '../actions/authActions'
+import auth from '../service/firebase'
 
 export const INITIAL_STATE = {
   email: null,
   uid: null,
+  img: null,
   loading: false
 }
 
 export default function authReducer(state = INITIAL_STATE, action) {
-
-  console.log(action)
+  console.log("auth reduccer", action);
   switch (action.type) {
 
     case actions.LOGIN:
       const payload = action.payload;
       return {
-        ...state, email: payload.email, uid: payload.uid, loading: false
+        ...state, email: auth.currentUser.email, uid: payload.userId, img: payload.img, loading: false
       };
 
     case actions.LOGOUT:
@@ -30,9 +31,14 @@ export default function authReducer(state = INITIAL_STATE, action) {
         ...state, loading: false
       };
 
+    case actions.NEW_USER:
+
+      return {
+         ...state ,uid: action.payload.userId, img: action.payload.img, email: auth.currentUser.email
+      };
+
     case actions.ERROR:
-      console.log("actions.ERROR");
-      return INITIAL_STATE;
+      return state;
 
     default:
       return state;

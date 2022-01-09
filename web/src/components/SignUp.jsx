@@ -2,8 +2,9 @@ import React from 'react'
 import { signInWithGoogle } from '../helpers/auth'
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux';
-import { newUser, loading, loaded } from '../actions/authActions';
+import { newUser, loading, loaded, newUserDB } from '../actions/authActions';
 import { useHistory } from "react-router-dom";
+
 
 export default function SignUp() {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -11,16 +12,18 @@ export default function SignUp() {
     const isLoading = useSelector(state => state.auth.loading);
     const navigate = useHistory();
 
-    const handleSignIn = (e) => {
+
+    const handleSignIn = async (e) => {
         e.preventDefault();
-        signInWithGoogle();
+        await signInWithGoogle();
+        dispatch(newUserDB());
     }
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
         dispatch(loading());
-        dispatch(newUser(data.email, data.password));
-        dispatch(laoded());
+        await dispatch(newUser(data.email, data.password));
+        dispatch(newUserDB());
+        dispatch(loaded());
     }
 
     const handleClick= (e) => {

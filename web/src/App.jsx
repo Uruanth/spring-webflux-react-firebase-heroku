@@ -27,8 +27,13 @@ const App = () => {
   const [user] = useAuthState(auth);
   const dispatch2 = useDispatch();
 
+  console.log(user);
+
   useEffect(() => {
-    dispatch2(login(user?.email, user?.uid));
+    dispatch2(login());
+    if(user){
+      user?.displayName;
+    }
   }, [user])
 
 
