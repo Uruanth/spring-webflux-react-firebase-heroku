@@ -13,7 +13,6 @@ export const Answer = ({ answer }) => {
 
 
 
-  // console.log("answer", answer)
 
   useEffect(() => {
     dispatch(updateQuestion(qid));
@@ -22,7 +21,6 @@ export const Answer = ({ answer }) => {
 
 
   const add_vote = (e) => {
-    console.log()
     dispatch(addVote(uid, answer.answerId))
 
 

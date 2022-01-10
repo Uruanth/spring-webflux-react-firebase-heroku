@@ -14,7 +14,6 @@ export const Question = ({ question, excerpt, onDelete }) => {
     dispatch(updateImg(question.userId));
   }, [])
 
-  console.log(question);
 
   return (
     <article className={excerpt ? 'question-excerpt' : 'question'}>
@@ -23,7 +22,7 @@ export const Question = ({ question, excerpt, onDelete }) => {
       </div>
       <div className="block-il">
         <h2>{question.question}</h2>
-        <p>{question.category}  - <small>{question.type}</small></p>
+        <p onClick={()=>handleCategory(question.category)}>{question.category}  - <small>{question.type}</small></p>
 
         {onDelete && (
           <button className="button right" onClick={() => onDelete(question.id)}>DELETE</button>

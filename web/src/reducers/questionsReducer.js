@@ -14,7 +14,6 @@ export const initialState = {
 
 
 export default function questionsReducer(state = initialState, action) {
-  console.log("question reduccer", action);
 
   switch (action.type) {
     case actions.LOADING:

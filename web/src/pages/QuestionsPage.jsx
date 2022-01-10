@@ -21,7 +21,7 @@ const QuestionsPage = ({ dispatch, loading, questions, hasErrors }) => {
         setLista(list)
     }
 
-
+  
 
     useEffect(() => {
         dispat(resetImg());
@@ -29,12 +29,16 @@ const QuestionsPage = ({ dispatch, loading, questions, hasErrors }) => {
         setLista(ques);
     }, [dispatch, ques.length]);
 
+
+
+
+
     const renderQuestions = () => {
         if (loading) return <p>Loading questions...</p>
         if (hasErrors) return <p>Unable to display questions.</p>
 
         if (lista.length > 0) return lista.map(question => <Question key={question.id} question={question} excerpt />)
-        return questions.map(question => <Question key={question.id} question={question} excerpt />)
+        return questions.map(question => <Question key={question.id} question={question} excerpt  />)
     }
 
     return (

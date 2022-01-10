@@ -2,7 +2,8 @@ import axios from 'axios'
 import auth from '../service/firebase'
 
 
-const URL_BASE = 'http://localhost:8080';
+// const URL_BASE = 'http://localhost:8080';
+const URL_BASE = 'https://app-question-dairon.herokuapp.com';
 
 export const LOADING = 'LOADING'
 export const LOADED_SUCCESS = 'LOADED_SUCCESS'

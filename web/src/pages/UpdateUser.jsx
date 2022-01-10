@@ -50,7 +50,7 @@ export default function UpdateUser() {
 
 
                 <button className="button right mr" type="submit">
-                    {isLoading ? "Wait" : "Confirm"}
+                    Confirm
                 </button>
                 <button className="button right mr"
                     onClick={(e) => handleClick(e)}

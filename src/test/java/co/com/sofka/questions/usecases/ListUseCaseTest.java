@@ -11,7 +11,7 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.*;
 
-class ListUseCaseTest {
+class   ListUseCaseTest {
 
      QuestionRepository repository;
      ListUseCase listUseCase;

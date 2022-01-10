@@ -1,7 +1,8 @@
 import axios from "axios";
 
 //Constantes 
-const URL_BASE = 'http://localhost:8080';
+// const URL_BASE = 'http://localhost:8080';
+const URL_BASE = 'https://app-question-dairon.herokuapp.com';
 
 
 export const UPDATE_IMG_ANSWER = 'UPDATE_IMG_ANSWER';
@@ -18,7 +19,6 @@ const ERROR = 'ERROR';
 export const addVote = (userId, answerId) => async (dispatch) => {
     try {
         const response = await axios.get(`${URL_BASE}/vote/${userId}/${answerId}`);
-        console.log(response);
         dispatch({
             type: ADD_VOTE_ANSWER,
             payload: response

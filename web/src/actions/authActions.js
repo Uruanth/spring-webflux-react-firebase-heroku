@@ -8,7 +8,8 @@ import {
 
 
 // Constantes
-const URL_BASE = 'http://localhost:8080';
+// const URL_BASE = 'http://localhost:8080';
+const URL_BASE = 'https://app-question-dairon.herokuapp.com';
 
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
@@ -94,7 +95,6 @@ export const newUser = (email, password) => async (dispatch) => {
     try {
         await signup(email, password)
             .then(response => {
-                console.log(response.user.email);
                 action = {
                     type: SIGNUP,
                     payload: {
@@ -119,7 +119,6 @@ export const newUserDB = () => async (dispatch) => {
     try {
         let data;
         if (user.userId){
-            console.log("user.userId");
             await axios.post(`${URL_BASE}/user`, user)
                 .then((response) => {
                    data = response.data;
@@ -135,7 +134,6 @@ export const newUserDB = () => async (dispatch) => {
         console.log("error", error)
     }
 
-    console.log(user);
 }
 
 
@@ -149,7 +147,6 @@ export const updateUser = (name, img) => async (dispatch) => {
     try {
         let data;
         if (user.userId){
-            console.log("user.userId", user);
             await axios.post(`${URL_BASE}/user/update`, user)
                 .then((response) => {
                    data = response.data;
@@ -165,5 +162,4 @@ export const updateUser = (name, img) => async (dispatch) => {
         console.log("error", error)
     }
 
-    console.log(user);
 }

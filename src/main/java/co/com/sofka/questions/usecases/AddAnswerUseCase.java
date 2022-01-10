@@ -32,10 +32,13 @@ public class AddAnswerUseCase implements SaveAnswer {
         return getUseCase.apply(answerDTO.getQuestionId()).flatMap(question ->
                 answerRepository.save(mapperUtils.mapperToAnswer().apply(answerDTO))
                         .map(answer -> {
-                            sendEmail.sendEmail(email,
-                                    "respondieron a tu pregunta: "+answerDTO.getQuestionId(),
-                                    "la respuesta fue:\n"+answerDTO.getAnswer());
+                            try {
+                                sendEmail.sendEmail(email,
+                                        "respondieron a tu pregunta: " + answerDTO.getQuestionId(),
+                                        "la respuesta fue:\n" + answerDTO.getAnswer());
+                            } catch (Exception e) {
 
+                            }
                             question.getAnswers().add(answerDTO);
                             return question;
                         })
