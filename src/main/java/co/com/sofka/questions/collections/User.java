@@ -2,8 +2,10 @@ package co.com.sofka.questions.collections;
 
 import co.com.sofka.questions.model.VotedAnswer;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,37 +14,52 @@ public class User {
 
     @Id
     private String id;
+    @NotBlank
+    @Indexed(unique = true)
     private String userId;
+    @NotBlank
     private String name;
+    @NotBlank
     private String img;
+    @NotBlank
+    private String email;
     private List<String> questionsId;
     private List<String> answersId;
     private List<String> votedQuestionsId;
     private List<VotedAnswer> votedAnswersId;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public User() {
 
     }
 
-    public User(String id, String userId, String name, String img, List<String> questionsId, List<String> answersId, List<String> votedQuestionsId, List<VotedAnswer> votedAnswersId) {
+    public User(String id, @NotBlank String userId, @NotBlank String name, @NotBlank String img, @NotBlank String email, List<String> questionsId, List<String> answersId, List<String> votedQuestionsId, List<VotedAnswer> votedAnswersId) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.img = img;
+        this.email = email;
         this.questionsId = questionsId;
         this.answersId = answersId;
         this.votedQuestionsId = votedQuestionsId;
         this.votedAnswersId = votedAnswersId;
     }
 
-    public User(String userId, String name, String img) {
+    public User(@NotBlank String userId, @NotBlank String name, @NotBlank String img) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.img = img;
-        this.questionsId  = new ArrayList<>();
-        this.answersId  = new ArrayList<>();
-        this.votedQuestionsId  = new ArrayList<>();
+        this.questionsId = new ArrayList<>();
+        this.answersId = new ArrayList<>();
+        this.votedQuestionsId = new ArrayList<>();
         this.votedAnswersId = new ArrayList<>();
     }
 

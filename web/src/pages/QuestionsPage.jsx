@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 
-import { fetchQuestions } from '../actions/questionActions'
+import { fetchQuestions, resetImg } from '../actions/questionActions'
 import { Question } from '../components/Question'
-import auth from '../service/firebase'
 
 
 const QuestionsPage = ({ dispatch, loading, questions, hasErrors }) => {
+    const dispat = useDispatch();
+
+    
     useEffect(() => {
+        dispat(resetImg());
         dispatch(fetchQuestions())
     }, [dispatch])
 

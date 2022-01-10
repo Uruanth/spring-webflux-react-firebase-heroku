@@ -8,6 +8,7 @@ import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.model.UserDTO;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 @Component
@@ -41,8 +42,9 @@ public class MapperUtils {
         return updateUser -> {
             var user = new User();
             user.setId(updateUser.getId());
-            user.setUserId(updateUser.getUserId());
+            user.setUserId(Objects.requireNonNull(updateUser.getUserId()));
             user.setName(updateUser.getName());
+            user.setEmail(updateUser.getEmail());
             user.setImg(updateUser.getImg());
             user.setQuestionsId(updateUser.getQuestionsId());
             user.setAnswersId(updateUser.getAnswersId());
@@ -55,9 +57,10 @@ public class MapperUtils {
     public Function<User, UserDTO> mapEntityToUser() {
         return entity -> new UserDTO(
                 entity.getId(),
-                entity.getUserId(),
+                Objects.requireNonNull(entity.getUserId()),
                 entity.getName(),
                 entity.getImg(),
+                entity.getEmail(),
                 entity.getQuestionsId(),
                 entity.getAnswersId(),
                 entity.getVotedQuestionsId(),

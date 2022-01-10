@@ -13,6 +13,8 @@ public class UserDTO {
     private String name;
     @NotBlank
     private String img;
+    @NotBlank
+    private String email;
     private List<String> questionsId;
     private List<String> answersId;
     private List<String> votedQuestionsId;
@@ -21,22 +23,37 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(@NotBlank(message = "user not found") String id, @NotBlank String userId, @NotBlank String name, @NotBlank String img) {
+    public UserDTO(@NotBlank(message = "user not found") String id,
+                   @NotBlank String userId,
+                   @NotBlank String name,
+                   @NotBlank String img,
+                   @NotBlank String email) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.img = img;
+        this.email = email;
     }
 
-    public UserDTO(@NotBlank(message = "user not found") String id, @NotBlank String userId, @NotBlank String name, @NotBlank String img, List<String> questionsId, List<String> answersId, List<String> votedQuestionsId, List<VotedAnswer> votedAnswersId) {
+    public UserDTO(@NotBlank(message = "user not found") String id, @NotBlank String userId, @NotBlank String name, @NotBlank String img,  @NotBlank String email, List<String> questionsId, List<String> answersId, List<String> votedQuestionsId, List<VotedAnswer> votedAnswersId) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.img = img;
+        this.email = email;
         this.questionsId = questionsId;
         this.answersId = answersId;
         this.votedQuestionsId = votedQuestionsId;
         this.votedAnswersId = votedAnswersId;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getId() {
@@ -110,10 +127,11 @@ public class UserDTO {
                 ", userId='" + userId + '\'' +
                 ", name='" + name + '\'' +
                 ", img='" + img + '\'' +
+                ", email='" + email + '\'' +
                 ", questionsId=" + questionsId +
                 ", answersId=" + answersId +
                 ", votedQuestionsId=" + votedQuestionsId +
-                ", votedAnswers=" + votedAnswersId +
+                ", votedAnswersId=" + votedAnswersId +
                 '}';
     }
 }

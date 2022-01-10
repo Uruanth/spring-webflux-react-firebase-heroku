@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addVote, removeVote, updateQuestion } from '../actions/answersActions'
+import { addVote, removeVote, updateQuestion, updateImg } from '../actions/answersActions'
 
 
 
@@ -13,13 +13,14 @@ export const Answer = ({ answer }) => {
 
 
 
-
+  // console.log("answer", answer)
 
   useEffect(() => {
     dispatch(updateQuestion(qid));
+    dispatch(updateImg(answer.userId))
   }, [change])
 
-  
+
   const add_vote = (e) => {
     console.log()
     dispatch(addVote(uid, answer.answerId))

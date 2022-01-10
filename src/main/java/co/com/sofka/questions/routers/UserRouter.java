@@ -1,10 +1,7 @@
 package co.com.sofka.questions.routers;
 
 import co.com.sofka.questions.model.UserDTO;
-import co.com.sofka.questions.usecases.user.RemoveVoteUseCase;
-import co.com.sofka.questions.usecases.user.UseCaseGetUser;
-import co.com.sofka.questions.usecases.user.UseCaseNewUser;
-import co.com.sofka.questions.usecases.user.VotedAnswerUseCase;
+import co.com.sofka.questions.usecases.user.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -35,6 +32,25 @@ public class UserRouter {
 
         );
     }
+
+
+    @Bean
+    public RouterFunction<ServerResponse> updateUser(UseCaseUpdateUser usecase) {
+        return route(
+                POST("/user/update").and(accept(MediaType.APPLICATION_JSON)),
+                request ->
+
+                        request.bodyToMono(UserDTO.class)
+                                .flatMap(newUserDTO -> usecase.apply(newUserDTO))
+                                .flatMap(result -> ServerResponse.ok()
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .bodyValue(result))
+
+
+
+        );
+    }
+
 
 
     @Bean

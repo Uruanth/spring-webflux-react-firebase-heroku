@@ -9,13 +9,14 @@ import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
 
-@Service
-@Validated
-public class UseCaseNewUser implements Function<UserDTO, Mono<UserDTO>> {
+
+@Service @Validated
+public class UseCaseUpdateUser implements Function<UserDTO, Mono<UserDTO>> {
+
     private final UserRepository userRepository;
     private final MapperUtils mapper;
 
-    public UseCaseNewUser(UserRepository userRepository, MapperUtils mapper) {
+    public UseCaseUpdateUser(UserRepository userRepository, MapperUtils mapper) {
         this.userRepository = userRepository;
         this.mapper = mapper;
     }
@@ -23,9 +24,12 @@ public class UseCaseNewUser implements Function<UserDTO, Mono<UserDTO>> {
     @Override
     public Mono<UserDTO> apply(UserDTO userDTO) {
         return userRepository.findByUserId(userDTO.getUserId())
-                .map(mapper.mapEntityToUser())
-                .switchIfEmpty(userRepository
-                        .save(mapper.mapperToUser().apply(userDTO))
-                        .map(mapper.mapEntityToUser()));
+                .flatMap(user -> {
+                    user.setImg(userDTO.getImg());
+                    user.setName(userDTO.getName());
+                    return userRepository.save(user);
+                })
+                .map(mapper.mapEntityToUser());
     }
+
 }

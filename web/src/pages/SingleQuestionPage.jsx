@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 
-import { fetchQuestion } from '../actions/questionActions'
-
+import { fetchQuestion, resetImg,  } from '../actions/questionActions'
+import { updateImg } from '../actions/answersActions'
 import { Question } from '../components/Question'
 import { Answer } from '../components/Answer'
 import { Link } from 'react-router-dom'
@@ -15,9 +15,19 @@ const SingleQuestionPage = ({
   loading,
   userId
 }) => {
+
+
+  const dispat = useDispatch();
+
+
+
   const { id } = match.params
+
   useEffect(() => {
     dispatch(fetchQuestion(id))
+    dispat(resetImg());
+    dispatch(updateImg(question.userId));
+
   }, [dispatch, id])
 
   const renderQuestion = () => {
@@ -27,7 +37,7 @@ const SingleQuestionPage = ({
     return <Question question={question} />
   }
   question.answers?.sort(((a, b) => b.position - a.position));
- 
+
 
   const renderAnswers = () => {
     return (question.answers && question.answers.length) ? question.answers.map(answer => (

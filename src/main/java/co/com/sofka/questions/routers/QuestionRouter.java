@@ -73,9 +73,10 @@ public class QuestionRouter {
 
     @Bean
     public RouterFunction<ServerResponse> addAnswer(AddAnswerUseCase addAnswerUseCase) {
-        return route(POST("/add").and(accept(MediaType.APPLICATION_JSON)),
+        return route(POST("/add/{email}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(AnswerDTO.class)
-                        .flatMap(addAnswerDTO -> addAnswerUseCase.apply(addAnswerDTO)
+                        .flatMap(addAnswerDTO -> addAnswerUseCase.apply(addAnswerDTO,
+                                        request.pathVariable("email"))
                                 .flatMap(result -> ServerResponse.ok()
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(result))

@@ -13,9 +13,10 @@ import SingleQuestionPage from './pages/SingleQuestionPage'
 import QuestionsPage from './pages/QuestionsPage'
 import QuestionFormPage from './pages/QuestionFormPage'
 import AnswerFormPage from './pages/AnswerFormPage'
+import UpdateUser from './pages/UpdateUser'
 import OwnerQuestionsPage from './pages/OwnerQuestionsPage'
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import SignIn from './components/SignIn'
 import SignOut from './components/SignOut'
@@ -24,17 +25,18 @@ import SignUp from './components/SignUp';
 
 
 const App = () => {
+
   const [user] = useAuthState(auth);
   const dispatch2 = useDispatch();
+  const state = useSelector(state => state.auth.name)
 
-  console.log(user);
 
   useEffect(() => {
     dispatch2(login());
     if(user){
       user?.displayName;
     }
-  }, [user])
+  }, [user, state])
 
 
   return (
@@ -51,6 +53,8 @@ const App = () => {
             <Route exact path="/list" component={OwnerQuestionsPage} />
             <Route exact path="/answer/:id" component={AnswerFormPage} />
             <Route exact path="/new" component={QuestionFormPage} />
+            <Route exact path="/update" component={UpdateUser} />
+            
             <Redirect to="/" />
           </Switch>
         </> :

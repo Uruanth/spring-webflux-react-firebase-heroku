@@ -7,13 +7,14 @@ export const initialState = {
   questions: [],
   question: {},
   redirect: null,
+  img: null,
   change: false
 }
 
 
 
 export default function questionsReducer(state = initialState, action) {
-  // console.log("question reduccer", action);
+  console.log("question reduccer", action);
 
   switch (action.type) {
     case actions.LOADING:
@@ -41,7 +42,18 @@ export default function questionsReducer(state = initialState, action) {
       return {
         ...state, question: action.payload, change: false
       };
-
+    case actions.UPDATE_IMG:
+      return {
+        ...state, questions: action.payload.questions
+      };
+    case answerActions.UPDATE_IMG_ANSWER:
+      return {
+        ...state, img: action.payload
+      };
+    case actions.RESET_IMG:
+      return {
+        ...state, img: null
+      };
     default:
       return state
   }

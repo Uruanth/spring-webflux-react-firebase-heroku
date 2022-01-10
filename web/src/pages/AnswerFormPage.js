@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import {  fetchQuestion, postAnswer } from '../actions/questionActions'
 import { connect } from 'react-redux'
 import { Question } from '../components/Question'
-import {  useSelector } from 'react-redux';
 
 
 
@@ -22,6 +21,7 @@ const FormPage = ({ dispatch, loading, redirect, match,hasErrors, question, user
     const onSubmit = data => {
         data.userId =  userId;
         data.questionId = id;
+        data.emailId= question.userId;
         dispatch(postAnswer(data));
     };
 
