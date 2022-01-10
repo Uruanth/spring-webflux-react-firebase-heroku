@@ -38,7 +38,7 @@ export default function authReducer(state = INITIAL_STATE, action) {
     case actions.NEW_USER:
 
       return {
-        ...state, uid: action.payload.userId, img: action.payload.img, email: auth.currentUser.email
+        ...state, uid: action.payload.userId, img: action.payload.img, email: auth.currentUser.email, loading: false
       };
     case actions.UPDATE_USER:
       return {
@@ -49,9 +49,9 @@ export default function authReducer(state = INITIAL_STATE, action) {
       };
 
     case actions.ERROR:
-      return state;
+      return {...state, loading: false};
 
     default:
-      return state;
+      return {...state, loading: false};
   }
 }

@@ -3,13 +3,14 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDIJLJsmSAJzJOFnJTyjEJ7L7y3NZ3RQwo",
-    authDomain: "question-app-dairon.firebaseapp.com",
-    projectId: "question-app-dairon",
-    storageBucket: "question-app-dairon.appspot.com",
-    messagingSenderId: "623378003719",
-    appId: "1:623378003719:web:59ee327231d046ccdc77a2"
-};
+    apiKey: "AIzaSyCTjAmzYsUpiDugfMUKqvSgY0nHf-h7-XM",
+    authDomain: "app-question-dairon.firebaseapp.com",
+    projectId: "app-question-dairon",
+    storageBucket: "app-question-dairon.appspot.com",
+    messagingSenderId: "188121249227",
+    appId: "1:188121249227:web:6e7c0a9fd3c3598b3d324e"
+  };
+
 
 const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();

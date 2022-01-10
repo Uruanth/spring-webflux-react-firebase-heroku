@@ -27,8 +27,7 @@ public class UseCaseGetUser implements Function<String, Mono<UserDTO>> {
                 .switchIfEmpty(Mono.defer(() -> {
                     throw new IllegalStateException("user not found");
                 }))
-                .onErrorStop()
-                ;
+                .onErrorStop();
         /*
          */
     }

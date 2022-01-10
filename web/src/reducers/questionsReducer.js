@@ -30,16 +30,16 @@ export default function questionsReducer(state = initialState, action) {
       };
     case answerActions.ADD_VOTE_ANSWER:
       return {
-        ...state, loading: true, change: true
+        ...state, loading: false, change: true
       };
     case answerActions.REMOVE_VOTE_ANSWER:
       return {
-        ...state, loading: true, change: true
+        ...state, loading: false, change: true
       };
 
     case answerActions.UPDATE_QUESTION:
       return {
-        ...state, question: action.payload, change: false
+        ...state, question: action.payload, change: false, loading: false
       };
     case actions.UPDATE_IMG:
       return {
@@ -47,13 +47,13 @@ export default function questionsReducer(state = initialState, action) {
       };
     case answerActions.UPDATE_IMG_ANSWER:
       return {
-        ...state, img: action.payload
+        ...state, img: action.payload, loading: false
       };
     case actions.RESET_IMG:
       return {
-        ...state, img: null
+        ...state, img: null, loading: false
       };
     default:
-      return state
+      return {...state, loading: false}
   }
 }
