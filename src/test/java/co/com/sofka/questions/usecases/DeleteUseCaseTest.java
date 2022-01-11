@@ -25,7 +25,7 @@ class DeleteUseCaseTest {
     }
 
     @Test
-    public void addAnswerTest() {
+    public void deleteAnswerTest() {
         var id = "deleteId";
 
         Mockito.when(questionRepository.deleteById(Mockito.any(String.class))).thenReturn(Mono.empty());

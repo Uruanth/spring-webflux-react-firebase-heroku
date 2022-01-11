@@ -32,6 +32,9 @@ public class VotedAnswerUseCase implements BiFunction<String, String, Mono<Strin
     public Mono<String> apply(String userId, String answersId) {
         return assignVote(userId, answersId)
                 .flatMap(user -> getAnswersUser(user.getUserId()))
+                .switchIfEmpty(Mono.error(()->{
+                   return new IllegalArgumentException("asdsa");
+                }))
                 .map(lista -> lista.stream()
                         .filter(answer -> answer.getAnswerId().equals(answersId))
                         .collect(Collectors.toList())
@@ -39,12 +42,11 @@ public class VotedAnswerUseCase implements BiFunction<String, String, Mono<Strin
                 .flatMap(ans -> addVote(answersId))
                 .flatMap(ans -> addVote(answersId))
                 .map(answer -> answer.getId())
-                .switchIfEmpty(newAnswers(answersId, userId))
-                .onErrorStop();
+                .switchIfEmpty(newAnswers(answersId, userId));
     }
 
     private Mono<List<VotedAnswer>> getAnswersUser(String userId) {
-        return getUser.apply(userId).flatMap(user -> Mono.just(user.getVotedAnswersId()));
+        return getUser.apply(userId).map(user -> user.getVotedAnswersId());
     }
 
     private Mono<Answer> getAnswersId(String answersId) {
@@ -77,7 +79,7 @@ public class VotedAnswerUseCase implements BiFunction<String, String, Mono<Strin
     }
 
 
-    public Mono<User> assignVote(String userId, String answerId) {
+    private Mono<User> assignVote(String userId, String answerId) {
         return userRepository.findByUserId(userId)
                 .flatMap(user -> {
                     var uu = user.getVotedAnswersId()

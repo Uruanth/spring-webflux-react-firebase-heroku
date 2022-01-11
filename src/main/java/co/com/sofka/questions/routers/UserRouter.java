@@ -63,6 +63,7 @@ public class UserRouter {
                                 usecase.apply(request.pathVariable("userId")),
                                 UserDTO.class
                         ))
+
         );
 
     }
@@ -78,7 +79,7 @@ public class UserRouter {
                                         request.pathVariable("answerId")),
                                 String.class
                         ))
-                        .onErrorReturn(ServerResponse.notFound().build().block())
+                        .onErrorResume(error -> ServerResponse.badRequest().build())
         );
     }
 
